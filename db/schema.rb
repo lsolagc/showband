@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_145305) do
+ActiveRecord::Schema.define(version: 2022_02_06_161424) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -36,6 +36,27 @@ ActiveRecord::Schema.define(version: 2022_02_06_145305) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "musics", force: :cascade do |t|
+    t.string "title"
+    t.string "artist"
+    t.boolean "available"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "musics_shows", id: false, force: :cascade do |t|
+    t.integer "music_id", null: false
+    t.integer "show_id", null: false
+  end
+
+  create_table "shows", force: :cascade do |t|
+    t.string "venue"
+    t.string "venue_address"
+    t.datetime "start_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
