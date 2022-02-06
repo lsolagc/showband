@@ -23,7 +23,11 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'activeadmin'
+gem 'activeadmin-searchable_select' # https://github.com/codevise/activeadmin-searchable_select
+gem 'active_admin_datetimepicker' # https://github.com/activeadmin-plugins/active_admin_datetimepicker
+gem 'jquery-rails'
 gem 'devise'
+gem 'rails_db'
 gem 'simple_form'
 
 # Use Active Storage variant
