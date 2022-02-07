@@ -15,13 +15,14 @@ ActiveAdmin.register Show do
   #   permitted
   # end
 
-  permit_params :venue, :venue_address, :start_time, music_ids: []
+  permit_params :venue, :venue_address, :start_time, :status, music_ids: []
 
   show do
     attributes_table do
       row :venue
       row :venue_address
       row :start_time
+      row :status
     end
     panel "Musics" do
       table_for show.musics do
@@ -36,6 +37,7 @@ ActiveAdmin.register Show do
       f.input :venue
       f.input :venue_address
       f.input :start_time, as: :date_time_picker
+      f.input :status, as: :select, collection: Show.statuses.keys.map{|k| [k, k]}
     end
 
     f.inputs "Musics" do
