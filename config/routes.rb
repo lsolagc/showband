@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :requests, only: [:new, :create, :destroy]
   resources :shows
   resources :musics
   root to: "welcome#index"

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Requester:</strong>
+  <%= @request.requester %>
+</p>
+
+<p>
+  <strong>Music:</strong>
+  <%= @request.music_id %>
+</p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @request.show_id %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>

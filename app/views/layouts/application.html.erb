@@ -11,9 +11,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+    <% if notice %>
+      <h3 class="notice alert-success"><%= notice %></h3>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
+    <div class='container-fluid'>
+      <%= yield %>
+    </div>
   </body>
 </html>

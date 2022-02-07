@@ -1,0 +1,40 @@
+<% show = Show.where('start_time > ?', DateTime.current).order(:start_time).first %>
+<div class='row'>
+  <div class='d-flex flex-column align-items-center p-2'>
+    <div>
+      <h1>Showband</h1>
+      <h4>Manage shows, available musics and audience requests!</h4>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class='d-flex flex-column align-items-center p-2'>
+    <h2>Next show:</h2>
+    <h4>Venue: <%= show.venue %></h4>
+    <h4>Address: <%= show.venue_address %></h4>
+    <h4>Start Time: <%= I18n.l(show.start_time, format: :short) %></h4>
+  </div>
+</div>
+<% if show.open? %>
+  <div class="row">
+    <div class="d-flex justify-content-center p-2">
+      <h3><%= link_to "Make your song request!", new_request_path %></h3>
+    </div>
+  </div>
+  <% if session['requests'].present? %>
+    <hr>
+    <div class="row">
+      <div class='d-flex flex-column align-items-center p-2'>
+        <h3>Your song requests:</h3>
+        <% session[:requests].each do |request| %>
+          <div class="d-flex justify-content-center">
+            <p><%= request["music"] %></p>
+            <% req = Request.find(request["id"]) %>
+            <p class='px-2'><%= link_to "Cancel request", request_path(req), method: :delete %></p>
+          </div>
+        <% end %>
+      <div>
+    </div>
+  <% end %>
+<% end %>

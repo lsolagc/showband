@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 2022_02_06_161424) do
     t.integer "show_id", null: false
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.string "requester"
+    t.integer "music_id", null: false
+    t.integer "show_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["music_id"], name: "index_requests_on_music_id"
+    t.index ["show_id"], name: "index_requests_on_show_id"
+  end
+
   create_table "shows", force: :cascade do |t|
     t.string "venue"
     t.string "venue_address"
@@ -59,4 +69,6 @@ ActiveRecord::Schema.define(version: 2022_02_06_161424) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "requests", "musics"
+  add_foreign_key "requests", "shows"
 end
