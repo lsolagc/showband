@@ -1,6 +1,7 @@
 class Request < ApplicationRecord
   belongs_to :music
   belongs_to :show
+  belongs_to :requester, class_name: "User"
 
   validates :music, presence: true
 

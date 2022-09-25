@@ -1,5 +1,4 @@
 <%= simple_form_for @request, url: requests_path, method: :post do |f| %>
-  <%= f.input :requester, input_html: { class:'form-control' }, wrapper_html: { class: 'm-3' } %>
   <%= f.association :music, collection: Music.collection(Music.all),  input_html: { class:'form-control js-searchable' }, wrapper_html: { class: 'm-3' } %>
   <%= f.button :submit %>
 <% end %>

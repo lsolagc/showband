@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_183935) do
+ActiveRecord::Schema.define(version: 2022_04_15_140046) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -47,17 +50,18 @@ ActiveRecord::Schema.define(version: 2022_02_06_183935) do
   end
 
   create_table "musics_shows", id: false, force: :cascade do |t|
-    t.integer "music_id", null: false
-    t.integer "show_id", null: false
+    t.bigint "music_id", null: false
+    t.bigint "show_id", null: false
   end
 
   create_table "requests", force: :cascade do |t|
-    t.string "requester"
-    t.integer "music_id", null: false
-    t.integer "show_id", null: false
+    t.bigint "music_id", null: false
+    t.bigint "show_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "requester_id"
     t.index ["music_id"], name: "index_requests_on_music_id"
+    t.index ["requester_id"], name: "index_requests_on_requester_id"
     t.index ["show_id"], name: "index_requests_on_show_id"
   end
 
@@ -68,6 +72,18 @@ ActiveRecord::Schema.define(version: 2022_02_06_183935) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "requests", "musics"

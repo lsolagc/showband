@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :requests, only: [:new, :create, :destroy]
-  resources :shows
-  resources :musics
+  devise_for :users
+  resources :requests, only: [:index, :new, :create, :destroy]
+  resources :shows, only: [:index, :show]
+  resources :musics, only: [:index]
   root to: "welcome#index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
